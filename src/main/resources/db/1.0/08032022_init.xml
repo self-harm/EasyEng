@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
+    <changeSet author="kseniia lebedeva"
+               id="08032022_init">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="dictionary">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="language" type="TEXT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+
+        <createTable tableName="word">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="word" type="TEXT"/>
+            <column name="level" type="BIGINT"/>
+            <column name="dictionary_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="dictionary"
+                                 baseColumnNames="user_id"
+                                 constraintName="user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"
+        />
+
+        <addForeignKeyConstraint baseTableName="word"
+                                 baseColumnNames="dictionary_id"
+                                 constraintName="dictionary_id_fk"
+                                 referencedTableName="dictionary"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+</databaseChangeLog>
