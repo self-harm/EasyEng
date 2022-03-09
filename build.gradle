@@ -24,7 +24,11 @@ repositories {
 
 dependencies {
 //    todo: refactoring
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security',
+                   'org.springframework.security:spring-security-crypto:5.6.2',
+                   /*swagger*/
+                   'org.springdoc:springdoc-openapi-ui:1.6.6'
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
@@ -41,7 +45,6 @@ dependencies {
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.3'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.6.4'
     implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.4.2.Final'
-
 }
 
 tasks.named('test') {

@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
+@Table(name = "user", schema = "public")
 public class User {
 
     @Id
