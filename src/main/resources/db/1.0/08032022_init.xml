@@ -9,8 +9,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
     <changeSet author="kseniia lebedeva"
                id="08032022_init">
-        <createTable tableName="user">
-            <column name="id" type="BIGINT">
+        <createTable tableName="_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="first_name" type="TEXT">
@@ -22,7 +22,7 @@
             <column name="email" type="TEXT">
                 <constraints nullable="false"/>
             </column>
-            <column name="phone_number" type="BIGINT">
+            <column name="login" type="TEXT">
                 <constraints nullable="false"/>
             </column>
             <column name="password" type="TEXT">
@@ -30,8 +30,17 @@
             </column>
         </createTable>
 
-        <createTable tableName="dictionary">
+        <createTable tableName="role">
             <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="dictionary">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="language" type="TEXT"/>
@@ -39,7 +48,7 @@
         </createTable>
 
         <createTable tableName="word">
-            <column name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="word" type="TEXT"/>
@@ -47,10 +56,19 @@
             <column name="dictionary_id" type="BIGINT"/>
         </createTable>
 
+        <createTable tableName="user_role">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <addForeignKeyConstraint baseTableName="dictionary"
                                  baseColumnNames="user_id"
                                  constraintName="user_id_fk"
-                                 referencedTableName="user"
+                                 referencedTableName="_user"
                                  referencedColumnNames="id"
         />
 
@@ -60,5 +78,28 @@
                                  referencedTableName="dictionary"
                                  referencedColumnNames="id"
         />
+
+        <addForeignKeyConstraint baseTableName="user_role"
+                                 baseColumnNames="role_id"
+                                 constraintName="role_id_fk"
+                                 referencedTableName="role"
+                                 referencedColumnNames="id"
+        />
+
+        <addForeignKeyConstraint baseTableName="user_role"
+                                 baseColumnNames="user_id"
+                                 constraintName="user_id_fk"
+                                 referencedTableName="_user"
+                                 referencedColumnNames="id"
+        />
+
+        <insert tableName="role">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="DEFAULT"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="SYSTEM"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

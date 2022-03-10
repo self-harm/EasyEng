@@ -4,6 +4,8 @@ import io.harmed.easyeng.dto.UserDTO;
 import io.harmed.easyeng.exception.EntityNotFoundException;
 import io.harmed.easyeng.model.User;
 import io.harmed.easyeng.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -15,38 +17,39 @@ import static io.harmed.easyeng.controller.util.PageUtils.getPage;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/employees")
+@Tag(name = "User", description = "The User API")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
-    // todo: add logging
-
-//    @GetMapping("/hi")
-//    public String test() {
-//        return "it's working";
-//    }
-
     @GetMapping
+    @Operation(summary = "Get all users")
     public Page<UserDTO> getAll(final Pageable pageable) {
+        log.debug("Get all users, page: {}", pageable);
         final var users = userService.findAll();
         return getPage(users, pageable);
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Get user by id")
     public UserDTO getById(@PathVariable final Long id) {
+        log.debug("Get user by id, id: {}", id);
         return userService.findById(id)
                           .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id), User.class));
     }
 
-    @PostMapping
-    public UserDTO create(@RequestBody final UserDTO userDTO) {
-        return userService.save(userDTO);
-    }
+//    @PostMapping
+//    @Operation(summary = "Create user")
+//    public UserDTO create(@RequestBody final UserDTO userDTO) {
+//        log.debug("Create user");
+//        return userService.save(userDTO);
+//    }
 
-    @PutMapping
-    public UserDTO update() {
-        // todo: implement
-        return null;
+    @PutMapping("{id}")
+    @Operation(summary = "Update user")
+    public UserDTO update(@PathVariable final Long id, @RequestBody final UserDTO userDTO) {
+        log.debug("Update user by id, id: {}", id);
+        return userService.update(id, userDTO);
     }
 }

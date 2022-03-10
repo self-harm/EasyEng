@@ -11,6 +11,8 @@ public interface UserService {
 
     Optional<UserDTO> findById(final Long id);
 
+    Optional<UserDTO> findByLogin(final String login);
+
     List<UserDTO> findAll();
 
     UserDTO update(final Long id, final UserDTO userDTO);
