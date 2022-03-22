@@ -3,8 +3,9 @@ package io.harmed.easyeng.mapper;
 import io.harmed.easyeng.dto.UserDTO;
 import io.harmed.easyeng.model.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = EncodedPasswordMapper.class)
 public interface UserMapper extends EntityMapper<UserDTO, User> {
 
     default User update(final UserDTO dto, final User entity) {
@@ -15,4 +16,12 @@ public interface UserMapper extends EntityMapper<UserDTO, User> {
 
         return entity;
     }
+
+    @Mapping(target = "password", qualifiedBy = EncodedMapping.class)
+    @Override
+    User toEntity(final UserDTO dto);
+
+    @Mapping(target = "password", ignore = true)
+    @Override
+    UserDTO toDto(final User entity);
 }

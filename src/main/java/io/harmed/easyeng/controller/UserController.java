@@ -36,20 +36,22 @@ public class UserController {
     public UserDTO getById(@PathVariable final Long id) {
         log.debug("Get user by id, id: {}", id);
         return userService.findById(id)
-                          .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id), User.class));
+                .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id), User.class));
     }
-
-//    @PostMapping
-//    @Operation(summary = "Create user")
-//    public UserDTO create(@RequestBody final UserDTO userDTO) {
-//        log.debug("Create user");
-//        return userService.save(userDTO);
-//    }
 
     @PutMapping("{id}")
     @Operation(summary = "Update user")
     public UserDTO update(@PathVariable final Long id, @RequestBody final UserDTO userDTO) {
         log.debug("Update user by id, id: {}", id);
         return userService.update(id, userDTO);
+    }
+
+    @PutMapping("/{id}/password")
+    @Operation(summary = "Update user password")
+    public UserDTO updatePassword(
+            @PathVariable final Long id,
+            final String oldPassword,
+            final String newPassword) {
+        return userService.updatePassword(id, oldPassword, newPassword);
     }
 }

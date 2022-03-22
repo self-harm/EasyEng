@@ -16,4 +16,10 @@ public interface UserService {
     List<UserDTO> findAll();
 
     UserDTO update(final Long id, final UserDTO userDTO);
+
+    UserDTO updatePassword(
+            final Long id,
+            final String oldPassword,
+            final String newPassword
+    );
 }
