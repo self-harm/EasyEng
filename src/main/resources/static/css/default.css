@@ -1,0 +1,35 @@
+:root {
+    --mainText: #9f98a8;
+}
+
+@font-face {
+    font-family: 'font';
+    src: url('../fonts/lora.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+    color: var(--mainText);
+    /* font-family: 'Caveat', cursive; */
+    font-family: 'font', serif;
+}
+
+body {
+    background: #ece6f6;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+.button {
+    background-color: var(--mainText);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
