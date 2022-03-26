@@ -1,9 +1,9 @@
 package io.harmed.easyeng.mapper;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public record EncodedPasswordMapper(PasswordEncoder encoder) {
 
     @EncodedMapping

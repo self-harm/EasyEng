@@ -3,7 +3,6 @@ package io.harmed.easyeng.service.security;
 import io.harmed.easyeng.model.Role;
 import io.harmed.easyeng.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +17,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
     private final UserRepository userRepository;
 
     @Override
@@ -27,7 +25,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 .findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User not found, login: %s", login)));
 
-        /*todo: extend logic by allowing multiple roles*/
         final Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getRoles().stream()
                 .map(Role::getName)

@@ -18,8 +18,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserMapper mapper;
