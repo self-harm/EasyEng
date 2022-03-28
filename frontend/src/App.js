@@ -13,7 +13,7 @@ class App extends Component {
 
     async componentDidMount() {
         fetch(
-            "/users")
+            "/user")
             .then((res) => res.json())
             .then((json) => {
                 this.setState({

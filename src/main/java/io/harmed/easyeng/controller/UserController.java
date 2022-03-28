@@ -18,7 +18,7 @@ import static io.harmed.easyeng.controller.util.PageUtils.getPage;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "User", description = "The User API")
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;

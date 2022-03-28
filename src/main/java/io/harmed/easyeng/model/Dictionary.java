@@ -18,5 +18,10 @@ public class Dictionary {
     @ManyToOne
     private User user;
 
+    @Enumerated(EnumType.STRING)
     private LanguageType language;
+
+    private String name;
+
+    private boolean isDeleted = Boolean.FALSE;
 }

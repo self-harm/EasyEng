@@ -9,5 +9,6 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
 
     <include file="08032022_init.xml" relativeToChangelogFile="true"/>
+    <include file="28032022_add_name_dictionary_table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

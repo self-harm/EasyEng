@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable().authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/swagger-ui.html").fullyAuthenticated()
-                .antMatchers("/users").hasRole("SYSTEM").anyRequest().authenticated()
+                .antMatchers("/user").hasRole("SYSTEM").anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll().logoutSuccessUrl("/");

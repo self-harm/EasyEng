@@ -24,4 +24,17 @@ public interface UserMapper extends EntityMapper<UserDTO, User> {
     @Mapping(target = "password", ignore = true)
     @Override
     UserDTO toDto(final User entity);
+
+    default User fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        return User.builder()
+                .id(id)
+                .build();
+    }
+
+    default String toId(final User user) {
+        return String.valueOf(user.getId());
+    }
 }
